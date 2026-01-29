@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник МЭШ</title>
+    <style>
+        body, html { margin:0; padding:0; height:100%; font-family: sans-serif; background:#f0f2f5; overflow:hidden; }
+        /* Экран 1: Заставка МЭШ */
+        #splash { position:fixed; top:0; left:0; width:100%; height:100%; background:#4b32a7; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:100; color:#fff; }
+        #splash img { width:120px; margin-bottom:20px; }
+        /* Экран 2: Логин */
+        #login { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#4b32a7; flex-direction:column; justify-content:center; align-items:center; z-index:90; color:#fff; }
+        input { padding:15px; width:250px; border-radius:10px; border:none; margin:10px 0; font-size:16px; }
+        button { padding:15px 40px; border-radius:10px; border:none; background:#ff9800; color:#fff; font-weight:bold; cursor:pointer; }
+        /* Экран 3: Дневник */
+        #diary { display:none; height:100%; overflow-y:auto; padding-bottom:50px; }
+        .app-header { background:#fff; padding:15px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ddd; }
+        .profile-btn { background:#ff4444; color:#fff; padding:5px 10px; border-radius:8px; font-size:12px; font-weight:bold; }
+        .card { background:#fff; margin:12px; padding:15px; border-radius:15px; box-shadow:0 2px 5px rgba(0,0,0,0.05); }
+        .subject { font-weight:bold; color:#333; }
+        /* Скример */
+        #s { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:999; }
+        #s img { width:100%; height:100%; object-fit:contain; animation: shake 0.04s infinite; }
+        @keyframes shake { 0% { transform:translate(5px); filter:invert(1); } 50% { transform:translate(-5px); filter:invert(0); } }
+    </style>
+</head>
+<body>
+
+<div id="splash">
+    <img src="https://it-world.ru/upload/iblock/d76/d760b86a079a078028198f3708a3857e.png" alt="logo">
+    <div style="font-weight:bold; font-size:18px;">ДНЕВНИК</div>
+    <div style="font-size:12px; opacity:0.8; margin-top:10px;">Московская электронная школа</div>
+</div>
+
+<div id="login">
+    <h2>Вход в аккаунт</h2>
+    <input type="password" placeholder="Пароль пользователя">
+    <button onclick="toDiary()">ПРОДОЛЖИТЬ</button>
+</div>
+
+<div id="diary">
+    <div class="app-header">
+        <div style="background:#4caf50; color:#fff; padding:8px; border-radius:50%; font-weight:bold;">СК</div>
+        <div class="profile-btn" onclick="scare()">УЗНАТЬ ИТОГИ ГОДА</div>
+        <div style="font-size:20px;">≡</div>
+    </div>
+    <div style="text-align:center; padding:10px; font-weight:bold;">Расписание: 29 Янв</div>
+    <div class="card"><div class="subject">Английский язык</div></div>
+    <div class="card"><div class="subject">История</div></div>
+    <div class="card"><div class="subject">Геометрия</div></div>
+</div>
+
+<div id="s"><img src="https://i.pinimg.com/474x/bc/00/e5/bc00e5012dd5e5f53ef1a6488f3b3ecb.jpg"></div>
+<audio id="a" src="https://image2url.com/r2/default/audio/1769684793356-c83b3975-084c-4e98-b7c3-4907dd4698ae.mp3" loop></audio>
+
+<script>
+    // 1. Убираем заставку через 5 секунд
+    setTimeout(() => {
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('login').style.display = 'flex';
+    }, 5000);
+
+    // 2. Переход в дневник
+    function toDiary() {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('diary').style.display = 'block';
+    }
+
+    // 3. Скример при нажатии на кнопку профиля
+    function scare() {
+        document.getElementById('s').style.display = 'block';
+        var audio = document.getElementById('a');
+        audio.volume = 1;
+        audio.play();
+        if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    }
+</script>
+</body>
+</html>
